@@ -4,7 +4,7 @@
 Builds a small population of simulated people, offers each one the red pill
 or the blue pill, and measures whether who they turn out to be depends on the
 model running them. The world — schema, dependency graph, hard masks — is
-data, in world.json; README.md maps everything onto MatrAIx's Persona-8B.
+data, in world.json. Everything below this docstring is the machine.
 
   python mini_matrix.py --dry-run --n 3 --show-hidden
   python mini_matrix.py --n 100 --models haiku,sonnet,opus,gpt-5.6-sol --reps 3
