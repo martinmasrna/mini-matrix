@@ -1,0 +1,255 @@
+{
+  "nodes": [
+    {
+      "id": "age_bracket",
+      "values": ["18-24", "25-34", "35-44", "45-54", "55-64", "65-74", "75+"],
+      "prior": [0.12, 0.20, 0.18, 0.17, 0.15, 0.11, 0.07],
+      "phrase": "aged {value}"
+    },
+    {
+      "id": "urbanicity",
+      "values": ["dense urban", "suburban", "small town", "rural"],
+      "prior": [0.30, 0.35, 0.20, 0.15],
+      "phrase": "living in a {value} area"
+    },
+    {
+      "id": "occupation",
+      "values": ["ER nurse", "schoolteacher", "software engineer", "farmer", "barista", "accountant", "startup founder", "freelance photographer"],
+      "prior": [0.14, 0.16, 0.14, 0.10, 0.12, 0.16, 0.08, 0.10],
+      "phrase": "{value} by trade"
+    },
+    {
+      "id": "life_stage",
+      "values": ["student", "early career", "mid-life", "empty nester", "retirement"],
+      "prior": [0.08, 0.22, 0.35, 0.20, 0.15],
+      "phrase": "in the {value} stage of life"
+    },
+    {
+      "id": "socioeconomic_band",
+      "values": ["low income", "lower-middle", "middle", "upper-middle", "high income"],
+      "prior": [0.15, 0.25, 0.30, 0.20, 0.10],
+      "phrase": "{value}"
+    },
+    {
+      "id": "relationship_status",
+      "values": ["single", "dating someone", "married", "widowed"],
+      "prior": [0.30, 0.20, 0.42, 0.08],
+      "phrase": "{value}"
+    },
+    {
+      "id": "household",
+      "values": ["lives alone", "lives with a partner", "young kids at home", "grown kids nearby"],
+      "prior": [0.28, 0.30, 0.24, 0.18],
+      "phrase": "{value}"
+    },
+    {
+      "id": "community_ties",
+      "values": ["barely knows the neighbors", "a few close friends", "deeply rooted in the community"],
+      "prior": [0.30, 0.45, 0.25],
+      "phrase": "{value}"
+    },
+    {
+      "id": "risk_appetite",
+      "values": ["avoids risk", "takes calculated risks", "chases the edge"],
+      "prior": [0.35, 0.50, 0.15],
+      "phrase": "{value}"
+    },
+    {
+      "id": "novelty_seeking",
+      "values": ["a creature of habit", "selectively curious", "always chasing something new"],
+      "prior": [0.35, 0.45, 0.20],
+      "phrase": "{value}"
+    },
+    {
+      "id": "media_diet",
+      "values": ["local news and television", "popular science and documentaries", "niche forums and rabbit holes"],
+      "prior": [0.40, 0.40, 0.20],
+      "phrase": "into {value}"
+    },
+    {
+      "id": "life_satisfaction",
+      "values": ["quietly restless", "content enough", "deeply content"],
+      "prior": [0.30, 0.50, 0.20],
+      "phrase": "{value}"
+    },
+    {
+      "id": "spirituality",
+      "values": ["devout", "vaguely spiritual", "secular"],
+      "prior": [0.25, 0.40, 0.35],
+      "phrase": "{value}"
+    }
+  ],
+  "edges": [
+    { "parent": "age_bracket", "child": "life_stage", "weight": 1.6,
+      "cpd": {
+        "18-24": [0.55, 0.40, 0.05, 0.00, 0.00],
+        "25-34": [0.10, 0.60, 0.28, 0.02, 0.00],
+        "35-44": [0.02, 0.18, 0.70, 0.10, 0.00],
+        "45-54": [0.01, 0.05, 0.60, 0.32, 0.02],
+        "55-64": [0.00, 0.02, 0.30, 0.45, 0.23],
+        "65-74": [0.00, 0.00, 0.08, 0.27, 0.65],
+        "75+":   [0.00, 0.00, 0.03, 0.12, 0.85]
+      }
+    },
+    { "parent": "age_bracket", "child": "relationship_status", "weight": 1.2,
+      "cpd": {
+        "18-24": [0.60, 0.30, 0.10, 0.00],
+        "25-34": [0.35, 0.25, 0.39, 0.01],
+        "35-44": [0.22, 0.12, 0.63, 0.03],
+        "45-54": [0.18, 0.08, 0.68, 0.06],
+        "55-64": [0.15, 0.05, 0.68, 0.12],
+        "65-74": [0.12, 0.03, 0.63, 0.22],
+        "75+":   [0.10, 0.02, 0.50, 0.38]
+      }
+    },
+    { "parent": "age_bracket", "child": "household", "weight": 1.2,
+      "cpd": {
+        "18-24": [0.55, 0.35, 0.10, 0.00],
+        "25-34": [0.30, 0.40, 0.29, 0.01],
+        "35-44": [0.18, 0.27, 0.50, 0.05],
+        "45-54": [0.18, 0.32, 0.25, 0.25],
+        "55-64": [0.22, 0.38, 0.05, 0.35],
+        "65-74": [0.28, 0.37, 0.01, 0.34],
+        "75+":   [0.40, 0.27, 0.01, 0.32]
+      }
+    },
+    { "parent": "relationship_status", "child": "household", "weight": 1.4,
+      "cpd": {
+        "single":         [0.75, 0.02, 0.13, 0.10],
+        "dating someone": [0.55, 0.30, 0.10, 0.05],
+        "married":        [0.02, 0.55, 0.30, 0.13],
+        "widowed":        [0.60, 0.02, 0.03, 0.35]
+      }
+    },
+    { "parent": "occupation", "child": "socioeconomic_band", "weight": 1.3,
+      "cpd": {
+        "ER nurse":               [0.05, 0.25, 0.45, 0.22, 0.03],
+        "schoolteacher":          [0.08, 0.35, 0.42, 0.13, 0.02],
+        "software engineer":      [0.02, 0.08, 0.30, 0.42, 0.18],
+        "farmer":                 [0.20, 0.35, 0.30, 0.12, 0.03],
+        "barista":                [0.35, 0.40, 0.20, 0.05, 0.00],
+        "accountant":             [0.03, 0.15, 0.40, 0.32, 0.10],
+        "startup founder":        [0.15, 0.15, 0.20, 0.25, 0.25],
+        "freelance photographer": [0.25, 0.35, 0.25, 0.12, 0.03]
+      }
+    },
+    { "parent": "latent_openness_novelty", "child": "occupation", "weight": 0.6,
+      "cpd": {
+        "Low":    [0.14, 0.18, 0.10, 0.16, 0.12, 0.22, 0.02, 0.06],
+        "Medium": [0.16, 0.16, 0.14, 0.10, 0.12, 0.16, 0.06, 0.10],
+        "High":   [0.12, 0.10, 0.18, 0.05, 0.10, 0.08, 0.17, 0.20]
+      }
+    },
+    { "parent": "latent_openness_novelty", "child": "novelty_seeking", "weight": 1.6,
+      "cpd": {
+        "Low":    [0.75, 0.22, 0.03],
+        "Medium": [0.25, 0.60, 0.15],
+        "High":   [0.05, 0.35, 0.60]
+      }
+    },
+    { "parent": "latent_openness_novelty", "child": "media_diet", "weight": 1.3,
+      "cpd": {
+        "Low":    [0.70, 0.25, 0.05],
+        "Medium": [0.35, 0.48, 0.17],
+        "High":   [0.10, 0.45, 0.45]
+      }
+    },
+    { "parent": "latent_social_embeddedness", "child": "relationship_status", "weight": 0.9,
+      "cpd": {
+        "Low":    [0.55, 0.20, 0.20, 0.05],
+        "Medium": [0.28, 0.22, 0.43, 0.07],
+        "High":   [0.12, 0.15, 0.63, 0.10]
+      }
+    },
+    { "parent": "latent_social_embeddedness", "child": "community_ties", "weight": 1.7,
+      "cpd": {
+        "Low":    [0.75, 0.22, 0.03],
+        "Medium": [0.22, 0.60, 0.18],
+        "High":   [0.03, 0.35, 0.62]
+      }
+    },
+    { "parent": "urbanicity", "child": "community_ties", "weight": 0.8,
+      "cpd": {
+        "dense urban": [0.45, 0.40, 0.15],
+        "suburban":    [0.30, 0.48, 0.22],
+        "small town":  [0.18, 0.42, 0.40],
+        "rural":       [0.15, 0.40, 0.45]
+      }
+    },
+    { "parent": "latent_social_embeddedness", "child": "life_satisfaction", "weight": 1.2,
+      "cpd": {
+        "Low":    [0.55, 0.38, 0.07],
+        "Medium": [0.25, 0.55, 0.20],
+        "High":   [0.12, 0.48, 0.40]
+      }
+    },
+    { "parent": "socioeconomic_band", "child": "life_satisfaction", "weight": 0.9,
+      "cpd": {
+        "low income":   [0.50, 0.42, 0.08],
+        "lower-middle": [0.38, 0.50, 0.12],
+        "middle":       [0.25, 0.55, 0.20],
+        "upper-middle": [0.18, 0.52, 0.30],
+        "high income":  [0.15, 0.50, 0.35]
+      }
+    },
+    { "parent": "latent_security_tradition_orientation", "child": "risk_appetite", "weight": 1.7,
+      "cpd": {
+        "Low":    [0.08, 0.47, 0.45],
+        "Medium": [0.28, 0.60, 0.12],
+        "High":   [0.65, 0.33, 0.02]
+      }
+    },
+    { "parent": "age_bracket", "child": "risk_appetite", "weight": 0.8,
+      "cpd": {
+        "18-24": [0.20, 0.50, 0.30],
+        "25-34": [0.25, 0.52, 0.23],
+        "35-44": [0.32, 0.53, 0.15],
+        "45-54": [0.38, 0.52, 0.10],
+        "55-64": [0.45, 0.48, 0.07],
+        "65-74": [0.52, 0.44, 0.04],
+        "75+":   [0.58, 0.39, 0.03]
+      }
+    },
+    { "parent": "latent_security_tradition_orientation", "child": "spirituality", "weight": 1.4,
+      "cpd": {
+        "Low":    [0.08, 0.32, 0.60],
+        "Medium": [0.20, 0.48, 0.32],
+        "High":   [0.52, 0.35, 0.13]
+      }
+    }
+  ],
+  "masks": [
+    { "parent": "age_bracket", "child": "life_stage", "when_parent_is": ["18-24", "25-34", "35-44", "45-54"], "forbid": ["retirement"] },
+    { "parent": "age_bracket", "child": "life_stage", "when_parent_is": ["45-54", "55-64", "65-74", "75+"], "forbid": ["student"] },
+    { "parent": "age_bracket", "child": "life_stage", "when_parent_is": ["55-64", "65-74", "75+"], "forbid": ["early career"] },
+    { "parent": "age_bracket", "child": "life_stage", "when_parent_is": ["65-74", "75+"], "forbid": ["mid-life"] },
+    { "parent": "age_bracket", "child": "life_stage", "when_parent_is": ["18-24", "25-34", "35-44"], "forbid": ["empty nester"] },
+    { "parent": "age_bracket", "child": "household", "when_parent_is": ["65-74", "75+"], "forbid": ["young kids at home"] },
+    { "parent": "age_bracket", "child": "relationship_status", "when_parent_is": ["18-24", "25-34"], "forbid": ["widowed"] },
+    { "parent": "age_bracket", "child": "household", "when_parent_is": ["18-24", "25-34", "35-44"], "forbid": ["grown kids nearby"] },
+    { "parent": "relationship_status", "child": "household", "when_parent_is": ["single"], "forbid": ["lives with a partner"] }
+  ],
+  "latents": [
+    {
+      "id": "latent_openness_novelty",
+      "hidden": true,
+      "description": "The pull toward the new and unknown. Drives what they read, what they chase, and what they do with an open door.",
+      "values": ["Low", "Medium", "High"],
+      "prior": [0.30, 0.40, 0.30]
+    },
+    {
+      "id": "latent_social_embeddedness",
+      "hidden": true,
+      "description": "How woven into other people's lives they are. Drives relationships, community ties, and how much a life is worth keeping as-is.",
+      "values": ["Low", "Medium", "High"],
+      "prior": [0.30, 0.40, 0.30]
+    },
+    {
+      "id": "latent_security_tradition_orientation",
+      "hidden": true,
+      "description": "How much safety and the familiar outrank everything else. Drives risk appetite and faith in the old ways.",
+      "values": ["Low", "Medium", "High"],
+      "prior": [0.30, 0.40, 0.30]
+    }
+  ]
+}
