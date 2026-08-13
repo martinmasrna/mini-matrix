@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Analysis for the Mini Matrix run: the per-model table, majority calls, and
-flip counts, computed from whatever trials_*.jsonl files sit next to it."""
+flip counts, computed from whatever is in trials/."""
 import json, glob
 from collections import Counter, defaultdict
 
